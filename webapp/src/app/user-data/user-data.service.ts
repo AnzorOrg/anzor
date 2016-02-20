@@ -13,6 +13,8 @@ export class UserDataService {
 	}
 
 	signUp = function (firstName, lastName, email, password, callback){
+		var self = this
+		
 		this.user = new User(firstName, lastName, email)
 
 		var body = {
@@ -24,7 +26,7 @@ export class UserDataService {
 
 
 		this._apiService.post('createUser', body, function (res){
-			callback()
+			self.handleUserData(res, callback)
 		})
 	}
 
@@ -33,16 +35,27 @@ export class UserDataService {
 	}
 
 	signIn = function(email, password, callback) {
+		var self = this
+		
 		var body = {
 			email: email,
 			password: password
 		}
 
 		this._apiService.post('login', body, function(res){
-			var body = res.body
-			this.user = new User(body.firstName, body.lastName, body.email)
-			callback()
+			self.handleUserData(res, callback)
 		})
+	}
+
+	private handleUserData(res, callback){
+		var body = JSON.parse(res._body)
+
+		this.user = new User(body.firstName, body.lastName, body.email)
+		callback()
+	}
+
+	isSignedIn = function(trueCallback, falseCallback){
+
 	}
 
 }
