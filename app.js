@@ -23,20 +23,21 @@ app.get('/', function(req, res) {
 });
 
 app.post('/api/createUser', function(req, res){
-	var hash = crypt.createHash('sha256').update(req.password).digest('base64');
+	var hash = crypto.createHash('sha256').update(req.body.password).digest('base64');
 	req.body.password = hash;
 	var newUser = new User(req.body);
-	User.findOne({email: req.body.email}).exec(function(err, user){
-		if(err)
-			newUser.save(function(err){
-				res.status(200).end();
-			})
+	newUser.save({isNew:true}, function(err){
+		if(err){
+			res.json(err)
+		}
+		else
+			res.status(200).end();
 	});
 });
 
 app.post('/api/login', function(req, res) {
-	var hash = crypt.createHash('sha256').update(req.password).digest('base64');
-	User.findOne({email:req.email, password:hash}).exec(function(err, user){
+	var hash = crypto.createHash('sha256').update(req.body.password).digest('base64');
+	User.findOne({email:req.body.email, password:hash}).exec(function(err, user){
 		if(err)
 			res.json({email:'Not found'});
 		else
