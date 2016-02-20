@@ -12,7 +12,7 @@ export class UserDataService {
 
 	}
 
-	signUp = function (firstName, lastName, email, password){
+	signUp = function (firstName, lastName, email, password, callback){
 		this.user = new User(firstName, lastName, email)
 
 		var body = {
@@ -24,7 +24,7 @@ export class UserDataService {
 
 
 		this._apiService.post('createUser', body, function (res){
-			console.log(res)
+			callback()
 		})
 	}
 
@@ -32,14 +32,16 @@ export class UserDataService {
 		return this.user.firstName
 	}
 
-	signIn = function(email, password) {
+	signIn = function(email, password, callback) {
 		var body = {
 			email: email,
 			password: password
 		}
 
 		this._apiService.post('login', body, function(res){
-			console.log(res)
+			var body = res.body
+			this.user = new User(body.firstName, body.lastName, body.email)
+			callback()
 		})
 	}
 
