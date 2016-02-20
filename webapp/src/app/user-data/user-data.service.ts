@@ -2,7 +2,7 @@ import {Injectable} from 'angular2/core'
 import {User} from './user'
 
 
-@Injectable ()
+@Injectable()
 export class UserDataService {
 	
 	public user: User;
