@@ -1,0 +1,21 @@
+$break-small: 480px;
+
+welcome-page {
+
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .container {
+    	background-color: white;
+    }
+
+    .intro {
+
+		@media screen and (max-width: $break-small) {
+			flex-direction: column;
+		}
+    }
+
+}
