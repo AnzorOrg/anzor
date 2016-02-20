@@ -3,7 +3,7 @@ import {Http, Response, Headers} from 'angular2/http'
 import {User} from './user'
 
 
-@Injectable()
+@Injectable ()
 export class UserDataService {
 	
 	public user: User;
@@ -13,6 +13,8 @@ export class UserDataService {
 	}
 
 	createUser = function (firstName, lastName, email, password){
+		console.log(password)
+
 		this.user = new User(firstName, lastName, email)
 
 		var headers = new Headers()
@@ -26,7 +28,8 @@ export class UserDataService {
 			password: password
 		}
 
-		this._http.post('/api/createUser/', JSON.stringify(body), {headers: headers}).subscribe(function (res){
+
+		this._http.post('/api/createUser', JSON.stringify(body), {headers: headers}).subscribe(function (res){
 			console.log(res)
 		})
 	}
