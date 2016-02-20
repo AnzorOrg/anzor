@@ -6,7 +6,8 @@ var Notification = new Schema({
 	firstName: {type:String, required:true},
 	lastName: {type:String, required:true},
 	team: {type:String, required: true},
-	type:{type:String, required: true}
+	type:{type:String, required: true},
+	read: Boolean
 }, {timestamps: true});
 
 module.exports = Notification;

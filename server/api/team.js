@@ -22,7 +22,7 @@ var TeamAPI = function(app){
 			}
 			else{
 				User.findOne({email: team.admins[0]}).exec(function(err,admin){
-					admin.notifications.push({email:req.session.email, firstName: req.session.firstName, lastName: req.session.lastName, team: teamName, type: 'join-request'});
+					admin.notifications.push({email:req.session.email, firstName: req.session.firstName, lastName: req.session.lastName, team: teamName, type: 'join-request', read:false});
 					admin.save({isNew:false},function(err){
 						if(err)
 							res.json(err);
@@ -50,7 +50,7 @@ var TeamAPI = function(app){
 							res.json({err:'User does not exist'});
 						}
 						else{
-							user.notifications.push({email:req.session.email, firstName: req.session.firstName, lastName: req.session.lastName, team: teamName, type: 'invite'});
+							user.notifications.push({email:req.session.email, firstName: req.session.firstName, lastName: req.session.lastName, team: teamName, type: 'invite', read:false});
 							user.save({isNew:false},function(err){
 								if(err)
 									res.json(err);

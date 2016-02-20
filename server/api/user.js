@@ -30,7 +30,10 @@ var UserAPI = function(app){
 	});
 
 	app.get('/api/notifications', Auth.restrict, function(req, res){
-		res.json({notifications: req.session.user.notifications});
+		User.findOne({email: req.session.user.email}).exec(function(err, user){
+			req.session.user.notifications = user.notifications;
+			res.json({notifications: req.session.user.notifications});
+		});
 	});
 
 	app.get('/api/my-teams', Auth.restrict, function(req, res){
