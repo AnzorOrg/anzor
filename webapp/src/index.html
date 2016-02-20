@@ -1,0 +1,39 @@
+<html>
+<head>
+    <title>Togethr</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Angular 2 Stuff -->
+    <script src="node_modules/angular2/bundles/angular2-polyfills.js"></script>
+    <script src="node_modules/systemjs/dist/system.src.js"></script>
+    <script src="node_modules/rxjs/bundles/Rx.js"></script>
+    <script src="node_modules/angular2/bundles/angular2.dev.js"></script>
+    <script src="node_modules/angular2/bundles/http.dev.js"></script>
+    <script src="node_modules/angular2/bundles/router.dev.js"></script>
+
+    <!-- CSS & Fonts -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css"></link>
+
+    <script>
+        System.config({
+            packages: {
+                app: {
+                    format: 'register',
+                    defaultExtension: 'js'
+                }
+            }
+        });
+
+        System.import('app/boot').then(null, console.error.bind(console));
+    </script>
+
+    <base href="/">
+
+</head>
+<body>
+  <div class="page">
+    <my-app></my-app>
+  </div>
+</body>
+</html>
