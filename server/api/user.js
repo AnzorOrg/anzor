@@ -3,7 +3,7 @@ const crypto = require('crypto');
 var Auth = require('../auth.js')
 
 var UserAPI = function(app){
-	app.post('/api/createUser', function(req, res){
+	app.post('/api/create-user', function(req, res){
 		var hash = crypto.createHash('sha256').update(req.body.password).digest('base64');
 		req.body.password = hash;
 		var newUser = new User(req.body);
@@ -20,7 +20,7 @@ var UserAPI = function(app){
 		Auth.authenticate(req, res);
 	});
 
-	app.get('/api/loggedIn', function(req,res){
+	app.get('/api/signed-in', function(req,res){
 		if(req.session.user){
 			res.json({isLoggedIn: true});
 		}
@@ -33,7 +33,7 @@ var UserAPI = function(app){
 		res.json({notifications: req.session.user.notifications});
 	});
 
-	app.get('/api/myTeams', Auth.restrict, function(req, res){
+	app.get('/api/my-teams', Auth.restrict, function(req, res){
 		res.json({teams: req.session.user.teams});
 	});
 }
