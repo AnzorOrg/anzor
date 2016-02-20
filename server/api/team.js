@@ -20,7 +20,7 @@ var TeamAPI = function(app){
 			if(!team){
 				res.json({err:'Team does not exist'});
 			}
-			else {
+			else{
 				User.findOne({email: team.admins[0]}).exec(function(err,admin){
 					admin.notifications.push({email:req.session.email, firstName: req.session.firstName, lastName: req.session.lastName, team: teamName, type: 'join-request'});
 					admin.save({isNew:false},function(err){
@@ -28,14 +28,40 @@ var TeamAPI = function(app){
 							res.json(err);
 						else
 							res.status(200).end();
-					})
+					});
 				});
 			}
 		});
 	});
 
 	app.post('/api/invite', Auth.restrict, function(req, res){
-		
+		var teamName = req.body.team;
+		Team.findOne({teamName: teamName}).exec(function(err, team){
+			if(!team){
+				res.json({err:'Team does not exist'});
+			}
+			else{
+				if(team.admins[0] != req.session.user.email){
+					res.json({err: 'You are not the admin of this team'});
+				}
+				else{
+					User.findOne({email:req.body.email}).exec(function(err, user){
+						if(!user){
+							res.json({err:'User does not exist'});
+						}
+						else{
+							user.notifications.push({email:req.session.email, firstName: req.session.firstName, lastName: req.session.lastName, team: teamName, type: 'invite'});
+							user.save({isNew:false},function(err){
+								if(err)
+									res.json(err);
+								else
+									res.status(200).end();
+							});
+						}
+					});
+				}
+			}
+		});
 	});
 }
 
