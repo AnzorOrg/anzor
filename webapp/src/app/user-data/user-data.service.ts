@@ -3,7 +3,7 @@ import {Http, Response, Headers} from 'angular2/http'
 import {User} from './user'
 
 
-@Injectable ()
+@Injectable()
 export class UserDataService {
 	
 	public user: User;
