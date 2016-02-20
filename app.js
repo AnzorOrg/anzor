@@ -2,9 +2,10 @@
 
 var express = require('express');
 var mongoose = require('mongoose');
-
 const crypto = require('crypto')
 var bodyParser = require('body-parser')
+
+var Auth = require(__dirname+'/server/auth.js');
 var User = require(__dirname+'/server/models/user.js');
 
 mongoose.connect('mongodb://130.211.185.244:27017/mydb');
@@ -18,9 +19,7 @@ extended: true
 app.use('/node_modules', express.static(__dirname + '/node_modules'));
 app.use(express.static(__dirname + '/webapp/dist'));
 
-app.get('/', function(req, res) {
-  res.status(200).sendFile(__dirname+'/webapp/dist/index.html');
-});
+Auth(app);
 
 app.post('/api/createUser', function(req, res){
 	var hash = crypto.createHash('sha256').update(req.body.password).digest('base64');
@@ -36,14 +35,12 @@ app.post('/api/createUser', function(req, res){
 });
 
 app.post('/api/login', function(req, res) {
-	var hash = crypto.createHash('sha256').update(req.body.password).digest('base64');
-	User.findOne({email:req.body.email, password:hash}).exec(function(err, user){
-		if(err)
-			res.json({email:'Not found'});
-		else
-			res.json(user);
-	});
+	Auth.authenticate(req, res);
 });
+
+ app.use(function(req, res){
+    res.status(200).sendFile(__dirname+'/webapp/dist/index.html');
+  });
 
 if (module === require.main) {
   var server = app.listen(process.env.PORT || 8080, function () {
