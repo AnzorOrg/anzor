@@ -10,9 +10,11 @@ export class WelcomePageComponent {
 	constructor(private _userDataService: UserDataService) {}
 
 	signUp = function(firstName, lastName, email, password) {
-		console.log(password)
-		this._userDataService.createUser(firstName, lastName, email, password);
-		console.log(this._userDataService.getFirstName());
+		this._userDataService.signUp(firstName, lastName, email, password);
+	};
+
+	signIn = function(email, password) {
+		this._userDataService.signIn(email, password);
 	};
 
 }
