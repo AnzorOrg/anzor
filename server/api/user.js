@@ -19,6 +19,23 @@ var UserAPI = function(app){
 	app.post('/api/login', function(req, res) {
 		Auth.authenticate(req, res);
 	});
+
+	app.get('/api/loggedIn', function(req,res){
+		if(req.session.user){
+			res.json({isLoggedIn: true});
+		}
+		else {
+			res.json({isLoggedIn: false});
+		}
+	});
+
+	app.get('/api/notifications', restrict, function(req, res){
+		res.json({notifications: req.session.user.notifications});
+	});
+
+	app.get('/api/myTeams', restrict, function(req, res){
+		res.json({teams: req.session.user.teams});
+	});
 }
 
 module.exports = UserAPI;

@@ -18,7 +18,11 @@ Auth.authenticate = function(req, res) {
 		if(hash == user.password){
 			req.session.regenerate(function(){
 				req.session.user = user;
-				res.json(user);
+				res.json({
+					email: user.email,
+					firstName: user.firstName,
+					lastName: user.lastName
+				});
 			});
 		}
 		req.session.error('Auth failure');
