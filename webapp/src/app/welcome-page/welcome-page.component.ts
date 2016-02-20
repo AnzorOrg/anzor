@@ -19,18 +19,21 @@ export class WelcomePageComponent implements OnInit {
 	};
 
 	checkIfSignedIn = function() {
+		var self = this;
 		this._userDataService.isSignedIn(
-			this.userSignedIn,
-			function() { }
+			function(){self.userSignedIn()},
+			function(){}
 		);
 	};
 
 	signUp = function(firstName, lastName, email, password) {
-		this._userDataService.signUp(firstName, lastName, email, password, this.userSignedIn);
+		var self = this;
+		this._userDataService.signUp(firstName, lastName, email, password, function(){self.userSignedIn()});
 	};
 
 	signIn = function(email, password) {
-		this._userDataService.signIn(email, password, this.userSignedIn);
+		var self = this;
+		this._userDataService.signIn(email, password, function(){self.userSignedIn()});
 	};
 
 	userSignedIn = function() {

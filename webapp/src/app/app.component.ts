@@ -16,8 +16,8 @@ import {DashboardPageComponent} from './dashboard-page/dashboard-page.component'
     directives: [NavbarComponent, ROUTER_DIRECTIVES]
 })
 @RouteConfig([
-        { path: '/welcome', name: 'Welcome', component: WelcomePageComponent },
-        { path: '/dashboard', name: 'Dashboard', component: DashboardPageComponent },
+    { path: '/welcome', name: 'Welcome', component: WelcomePageComponent },
+    { path: '/dashboard', name: 'Dashboard', component: DashboardPageComponent },
     { path: '/', redirectTo: ['/Welcome'] }
 ])
 export class AppComponent {}

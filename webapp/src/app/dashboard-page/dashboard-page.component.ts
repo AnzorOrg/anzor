@@ -19,9 +19,10 @@ export class DashboardPageComponent implements OnInit{
 	};
 
 	checkIfSignedIn = function() {
+		var self = this;
 		this._userDataService.isSignedIn(
 			function() { },
-			this.userNotSignedIn
+			function(){self.userNotSignedIn()}
 		);
 	};
 
