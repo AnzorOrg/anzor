@@ -5,7 +5,7 @@ var express = require('express');
 var app = express();
 
 app.get('/', function(req, res) {
-  res.status(200).send('Hello, world!');
+  res.status(200).sendFile(__dirname+'/webapp/dist/index.html')
 });
 
 if (module === require.main) {
