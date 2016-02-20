@@ -32,7 +32,7 @@ export class UserDataService {
 		return this.user.firstName
 	}
 
-	singIn = function(email, password) {
+	signIn = function(email, password) {
 		var body = {
 			email: email,
 			password: password

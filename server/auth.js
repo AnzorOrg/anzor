@@ -1,5 +1,6 @@
 var session = require('express-session');
 var User = require(__dirname+'/models/user.js');
+var crypto = require('crypto')
 var Auth = function(app) {
 	app.use(session({
 		resave: false,
@@ -11,7 +12,6 @@ var Auth = function(app) {
 Auth.authenticate = function(req, res) {
 	User.findOne({email:req.body.email}).exec(function(err, user){
 		if(!user){
-			req.session.error('Auth failure');
 			res.json({email: 'Not found'});
 		}
 		var hash = crypto.createHash('sha256').update(req.body.password).digest('base64');
@@ -21,8 +21,8 @@ Auth.authenticate = function(req, res) {
 				res.json(user);
 			});
 		}
-		req.session.error('Auth failure');
-		res.redirect('/');
+		else
+			res.redirect('/');
 	});
 }
 
