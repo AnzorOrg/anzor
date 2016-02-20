@@ -2,8 +2,9 @@
 
 var express = require('express');
 var mongoose = require('mongoose');
+
 const crypto = require('crypto')
-var User = require(__dirname+'/server/models/User');
+var User = require(__dirname+'/server/models/user.js');
 
 mongoose.connect('mongodb://130.211.185.244:27017/mydb');
 var app = express();
