@@ -29,11 +29,11 @@ var UserAPI = function(app){
 		}
 	});
 
-	app.get('/api/notifications', restrict, function(req, res){
+	app.get('/api/notifications', Auth.restrict, function(req, res){
 		res.json({notifications: req.session.user.notifications});
 	});
 
-	app.get('/api/myTeams', restrict, function(req, res){
+	app.get('/api/myTeams', Auth.restrict, function(req, res){
 		res.json({teams: req.session.user.teams});
 	});
 }

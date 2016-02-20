@@ -1,5 +1,5 @@
 var mongoose = require('mongoose');
-var Announcement = require(__dirname+'announcement.js');
+var Announcement = require(__dirname+'/announcement.js');
 var Schema = mongoose.Schema;
 
 var teamSchema = new Schema({
