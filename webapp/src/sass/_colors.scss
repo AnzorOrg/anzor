@@ -1,0 +1,18 @@
+// Colors
+
+$light-gray: #ccc;
+$gray: #888;
+$dark-gray: #333;
+$shadow-gray: #222;
+
+$flat-blue: #334D5C;
+$flat-green: #45B29D;
+$flat-yellow: #EFC94C;
+$flat-orange: #E27A3F;
+$flat-red: #DF5A49;
+
+$flat-dark-blue: darken($flat-blue,10%);
+$flat-dark-green: darken($flat-green,10%);
+$flat-dark-yellow: darken($flat-yellow,10%);
+$flat-dark-orange: darken($flat-orange,10%);
+$flat-dark-red: darken($flat-red,10%);
