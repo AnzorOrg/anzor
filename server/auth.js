@@ -12,9 +12,9 @@ Auth.authenticate = function(req, res) {
 	User.findOne({email:req.body.email}).exec(function(err, user){
 		if(!user){
 			req.session.error('Auth failure');
-			res.redirect('/');
+			res.json({email: 'Not found'});
 		}
-		var hash = crypto.createHash('sha256').update(pwd).digest('base64');
+		var hash = crypto.createHash('sha256').update(req.body.password).digest('base64');
 		if(hash == user.password){
 			req.session.regenerate(function(){
 				req.session.user = user;

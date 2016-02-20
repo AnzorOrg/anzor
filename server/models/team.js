@@ -3,9 +3,10 @@ var Schema = mongoose.Schema;
 
 var teamSchema = new Schema({
 	teamName: {type: String, required: true, unique: true},
-	users: [String]
+	admins: [String],
+	members: [String] 
 });
 
-var Team = mongoose.model('Team', userSchema);
+var Team = mongoose.model('Team', teamSchema);
 
 module.exports = Team
