@@ -1,5 +1,5 @@
 import {Injectable} from 'angular2/core'
-import {Http, Response, Headers} from 'angular2/http'
+import {ApiService} from '../api-service/api-service'
 import {User} from './user'
 
 
@@ -8,20 +8,14 @@ export class UserDataService {
 	
 	public user: User;
 	
-	constructor(private _http: Http) {
+	constructor(private _apiService: ApiService) {
 
 	}
 
-	createUser = function (firstName, lastName, email, password){
-		console.log(password)
-
+	signUp = function (firstName, lastName, email, password){
 		this.user = new User(firstName, lastName, email)
 
-		var headers = new Headers()
-		headers.append('Content-Type','application/json')
-
 		var body = {
-			method: 'POST',
 			firstName: firstName,
 			lastName: lastName,
 			email: email,
@@ -29,13 +23,24 @@ export class UserDataService {
 		}
 
 
-		this._http.post('/api/createUser', JSON.stringify(body), {headers: headers}).subscribe(function (res){
+		this._apiService.post('createUser', body, function (res){
 			console.log(res)
 		})
 	}
 
 	getFirstName = function (){
 		return this.user.firstName
+	}
+
+	signIn = function(email, password) {
+		var body = {
+			email: email,
+			password: password
+		}
+
+		this._apiService.post('login', body, function(res){
+			console.log(res)
+		})
 	}
 
 }
