@@ -21,5 +21,6 @@ export class ApiService{
 
 	get = function(url, callback){
 		this._http.get(this.urlPrefix + url)
+			.subscribe(callback);
 	}
 }
