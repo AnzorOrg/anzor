@@ -3,29 +3,9 @@
 		<div class="left">
 			<h1>Tethr</h1>
 			<h3>Get togethr</h3>
-			<hr><hr>
-			<form id="signInForm">
-				<label>Email</label>
-				<input type="email" #signInEmail placeholder="Email">
-				<label>Password</label>
-				<input type="password" #signInPassword placeholder="Password">
-				<button class="" 
-					(click)="signIn(signInEmail.value,signInPassword.value)" >Sign In</button>
-			</form>
 		</div>
 		<div class="right">
-			<form id="signUpForm">
-				<label>Name</label>
-				<input #firstName type="text" placeholder="First Name">
-				<input type="text" #lastName placeholder="Last Name">
-				<label>Email</label>
-				<input type="email" #email placeholder="Email">
-				<label>Password</label>
-				<input type="password" #password placeholder="Password">
-				<input type="password" #confirmPassword placeholder="Confirm Password">
-				<button class="" 
-					(click)="signUp(firstName.value,lastName.value,email.value,password.value)" >Sign Up</button>
-			</form>
+			<sign-up-form></sign-up-form>
 		</div>
 	</div>
 </div>

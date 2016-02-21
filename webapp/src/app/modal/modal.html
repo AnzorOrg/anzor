@@ -1,0 +1,13 @@
+<div class="modal-container" #container hidden="true">
+	<div class="modal">
+		<div class="header">
+			<h3 class="title">{{title}}</h3>
+			<button (click)="hideModal(container)">
+				<i class="material-icons">close</i>
+			</button>
+		</div>
+		<div class="body">
+			<ng-content></ng-content>
+		</div>
+	</div>
+</div>

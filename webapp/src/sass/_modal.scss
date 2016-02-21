@@ -1,0 +1,36 @@
+.modal-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+
+    justify-content: center;
+    align-items: center;
+
+    background: rgba(50,50,50,.75);
+
+    .modal {
+
+    	opacity: 1;
+    	background-color: white;
+    	padding: 1rem 2rem;
+    	box-shadow: 0 8px 16px $shadow-gray;
+
+    	flex-direction: column;
+
+    	.header {
+
+    		padding-bottom: .5rem;
+    		border-bottom: solid 1px $light-gray;
+    		margin-bottom: .5rem;
+
+			.title {
+				flex: 1;
+				font-size: 2rem;
+				padding-right: 1rem;
+				align-items: center
+			}
+		}
+    }
+}

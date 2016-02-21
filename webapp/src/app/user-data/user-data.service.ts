@@ -50,10 +50,9 @@ export class UserDataService {
 		var self = this
 		this._apiService.get('signed-in', function(res) {
 			var data = res.json()
-			console.log(data)
 			if (data != null) {
 				if (self.user == null) {
-					self.user = new User(data.firstName, data.lastName, data.email)
+					self.user = User.fromJsonObject(data)
 				}
 				trueCallback()
 			} else {
@@ -63,7 +62,9 @@ export class UserDataService {
 	}
 
 	signOut = function(callback) {
+		var self = this;
 		this._apiService.get('signout', function (res) {
+			self.user = null;
 			callback()
 		})
 	}
@@ -71,7 +72,7 @@ export class UserDataService {
 	private handleUserData(res, callback){
 		var body = res.json()
 
-		this.user = new User(body.firstName, body.lastName, body.email)
+		this.user = User.fromJsonObject(body)
 		callback()
 	}
 

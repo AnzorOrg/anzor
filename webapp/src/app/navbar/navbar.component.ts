@@ -1,17 +1,45 @@
-import {Component} from 'angular2/core';
+import {Component, OnInit, ViewChild, Renderer} from 'angular2/core';
 import {Router} from 'angular2/router';
 import {UserDataService} from '../user-data/user-data.service';
 
+import {ModalComponent} from '../modal/modal.component';
+import {SignInFormComponent} from '../sign-in-form/sign-in-form.component';
+
 @Component({
 	selector: 'navbar',
-	templateUrl: './app/navbar/navbar.html'
+	templateUrl: './app/navbar/navbar.html',
+	directives: [ModalComponent, SignInFormComponent]
 })
-export class NavbarComponent {
+export class NavbarComponent implements OnInit {
+
+	@ViewChild('signInModal') signInModal;
+	modal;
 
 	constructor(
 		private _router: Router,
-		private _userDataService: UserDataService
+		private _userDataService: UserDataService,
+        private _renderer: Renderer
 	){};
+
+	ngOnInit() {
+		if (this._userDataService.isSignedIn != null)
+			this.checkIfSignedIn();
+	};
+
+	ngAfterViewInit() {
+		this.modal = 
+			this.signInModal.nativeElement.getElementsByClassName('modal-container')[0];
+	}
+
+	checkIfSignedIn = function() {
+		var self = this;
+		this._userDataService.isSignedIn(
+			function(){},
+			function() {
+				self._router.navigate(['Welcome']);
+			}
+		);
+	};
 
 	showDropdown = function(dropdown) {
 		dropdown.setAttribute('hidden', 'false');
@@ -21,9 +49,8 @@ export class NavbarComponent {
 		dropdown.setAttribute('hidden', 'true');
 	}
 
-	signIn = function(){
-		//	Show sign in modal
-		console.log('Sign in modal!');
+	signIn = function() {
+		this.modal.setAttribute('hidden', 'false');
 	};
 
 	signOut = function(){
