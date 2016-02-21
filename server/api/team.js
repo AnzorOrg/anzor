@@ -4,6 +4,15 @@ var User = require('../models/user.js');
 var Helper = require(__dirname+'/team-helper.js');
 
 var TeamAPI = function(app){
+	app.get('/api/team', Auth.restrict, function(req, res){
+		Team.findOne({teamName:req.body.team}).exec(function(err, team){
+			if(team)
+				res.json(team);
+			else
+				res.json({err:'Team not found'});
+		});
+	});
+
 	app.post('/api/create-team', Auth.restrict, function(req, res){
 		var newTeam = new Team({teamName: req.body.name, admins: [req.session.user.email]});
 		newTeam.save({isNew:true}, function(err){
