@@ -46,19 +46,12 @@ export class UserDataService {
 		})
 	}
 
-	private handleUserData(res, callback){
-		var body = res.json()
-
-		this.user = new User(body.firstName, body.lastName, body.email)
-		callback()
-	}
-
-	isSignedIn = function(trueCallback, falseCallback){
-		this._apiService.get('signed-in', function(res){
+	isSignedIn = function(trueCallback, falseCallback) {
+		this._apiService.get('signed-in', function(res) {
 			var data = res.json()
 			if (data.isLoggedIn) {
 				if (this.user != null) {
-					
+
 				}
 				trueCallback()
 			} else {
@@ -66,4 +59,17 @@ export class UserDataService {
 			}
 		})
 	}
+
+	signOut = function() {
+		this._apiService.get('signout', function (res) {})
+	}
+
+	private handleUserData(res, callback){
+		var body = res.json()
+
+		this.user = new User(body.firstName, body.lastName, body.email)
+		callback()
+	}
+
+	
 }

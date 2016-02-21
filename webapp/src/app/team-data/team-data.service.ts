@@ -28,4 +28,27 @@ export class TeamDataService {
 			callback()
 		})
 	}
+
+	invite  = function(teamName, userEmail, callback) {
+		var body = {
+			team: teamName,
+			email: userEmail
+		}
+
+		this._apiService.post('invite', body, function (res){
+			callback()
+		})
+	}
+
+	acceptJoinRequest = function(notificationId, callback) {
+		var body = {
+			id: notificationId
+		}
+
+		this._apiService.post('accept-join-request', body, function(res) {
+			callback()
+		})
+	}
+
+
 }
