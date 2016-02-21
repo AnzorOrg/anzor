@@ -35,7 +35,6 @@ export class AnnounceListComponent implements OnInit {
 	ngAfterViewInit() {
 		this.cModal = this.createModal.nativeElement.getElementsByClassName('modal-container')[0];
 		this.vModal = this.viewModal.nativeElement.getElementsByClassName('modal-container')[0];
-		console.log(this.viewModal);
 
 		this.cInputs = (this.createModal.nativeElement.getElementsByTagName('input'));
 		this.cTextareas = (this.createModal.nativeElement.getElementsByTagName('textarea'));
@@ -55,8 +54,6 @@ export class AnnounceListComponent implements OnInit {
 		var self = this;
 		var title = this.cInputs[0].value;
 		var body = this.cTextareas[0].value;
-
-		console.log(title);
 
 		this._teamDataService.makeAnnouncement(
 			this._routeParams.get('teamid'),

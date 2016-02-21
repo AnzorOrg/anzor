@@ -2,7 +2,7 @@
 	<label>Title</label>
 	<input type="text" #title placeholder="Title">
 	<label>Body</label>
-	<textarea rows="4" #body placeholder="Body"></textarea>
+	<textarea rows="8" #body placeholder="Body"></textarea>
 	<button *ngIf="hideButton != null" (click)="createAnnouncement(title.value, body.value)">Post Announcement</button>
 	<ng-content></ng-content>
 </form>

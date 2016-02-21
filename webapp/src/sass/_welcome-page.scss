@@ -6,7 +6,10 @@ welcome-page {
     align-items: center;
 
     .container {
-    	background-color: white;
+    	
+        background-color: #111;
+        color: white;
+
     }
 
     .intro {
@@ -14,14 +17,27 @@ welcome-page {
         width: 100%;
         padding: 1rem 0;
 
+        @media screen and (max-width: 520px) {
+            flex-direction: column;
+            align-items: center;
+            overflow: auto;
+        }
+
         &>div {
             padding: 1rem;
             width: 50%;
             flex-direction: column;
         }
 
-        &>.right {
-            border-left: solid 1px $light-gray;
+
+        &>.left {
+            justify-content: center;
+            align-items: center;
+
+            h1 {
+                font-size: 4rem;
+                font-family: 'Roboto Slab';
+            }
         }
 
     }

@@ -17,9 +17,12 @@
 
 	<div #viewModal>
 	  <modal title="Announcement">
-	  	<div *ngIf="currentAnnouncement != null">
-	  		<p class="title">{{currentAnnouncement.title}}</p>
-		    <p class="author-info">{{currentAnnouncement.author}} at {{currentAnnouncement.prettyTime}}</p>
+	  	<div *ngIf="currentAnnouncement != null" class="view-announcement">
+	  		<h2 class="title">{{currentAnnouncement.title}}</h2>
+	  		<div>
+		  		<hr>
+			    <p class="author-info">{{currentAnnouncement.author}} at {{currentAnnouncement.prettyTime}}</p>
+			</div>
 		    <p class="body">{{currentAnnouncement.body}}</p>
 	    </div>
 	  </modal>

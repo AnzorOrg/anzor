@@ -3,7 +3,8 @@ form {
     flex-direction: column;
     margin: 0;
 
-    label, input {
+    label, input, textarea {
+        font-family: Roboto;
         font-size: 1rem;
         margin-bottom: .5rem;
     }
@@ -12,7 +13,9 @@ form {
         font-family: 'Roboto Slab';
     }
 
-    input {
+    input, textarea {
         padding: .5rem;
+        border-radius: 8px;
+        outline: none;
     }
 }
