@@ -21,6 +21,7 @@ export class TeamDataService {
 			self._apiService.handleCallbackWithData(res, 
 				function(data){
 					var newTeam = Team.fromJsonObject(data)
+					self.teams.push(newTeam)
 					callback()
 				}, 
 				err)
@@ -126,6 +127,22 @@ export class TeamDataService {
 				err)
 		})
 	}
+
+	makeAnnouncement = function(team, title, body, callback, err) {
+		var self = this
+		var data = {
+			team: team,
+			title: title,
+			body: body
+		}
+
+		this._apiService.post('make-announcement', body, function(res){
+			self._apiService.handleCallbackWithData(res, callback, err)
+		})
+
+	}
+
+	
 
 
 }
