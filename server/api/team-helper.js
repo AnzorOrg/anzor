@@ -29,7 +29,7 @@ Helper.leaveGroup = function(username, teamName, admin){
 							user.notifications.push({email: req.session.user.email, firstName: req.session.user.firstName, lastName: req.session.user.lastName, team: team.teamName, type:'kicked', read:false});
 						user.save({isNew:false}, function(err){
 							console.log(err);
-							res.json({err:'user removed'});
+							res.json({msg:'user removed'});
 						});
 					}
 					else{

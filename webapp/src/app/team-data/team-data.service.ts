@@ -87,5 +87,45 @@ export class TeamDataService {
 		})
 	}
 
+	removeUser = function(userEmail, teamName, callback, notAccepted, err) {
+		var self = this
+		var body = {
+			email: userEmail,
+			team: teamName
+		}
+
+		this._apiService.post('remove-user', body, function(res) {
+			self._apiService.handleCallbackWithData(res,
+				function(data) {
+					if (data.err == null) {
+						callback()
+					} else {
+						notAccepted(data.err)
+					}
+				},
+				err)
+		})	
+	}
+
+	leaveTeam = function(userEmail, teamName, callback, notAccepted, err) {
+		var self = this
+		var body = {
+			email: userEmail,
+			team: teamName
+		}
+
+		this._apiService.post('leave-team', body, function(res) {
+			self._apiService.handleCallbackWithData(res,
+				function(data) {
+					if (data.err == null) {
+						callback()
+					} else {
+						notAccepted(data.err)
+					}
+				},
+				err)
+		})
+	}
+
 
 }
