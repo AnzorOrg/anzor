@@ -35,6 +35,7 @@ export class AnnounceListComponent implements OnInit {
 	ngAfterViewInit() {
 		this.cModal = this.createModal.nativeElement.getElementsByClassName('modal-container')[0];
 		this.vModal = this.viewModal.nativeElement.getElementsByClassName('modal-container')[0];
+		console.log(this.viewModal);
 
 		this.cInputs = (this.createModal.nativeElement.getElementsByTagName('input'));
 		this.cTextareas = (this.createModal.nativeElement.getElementsByTagName('textarea'));
@@ -46,6 +47,7 @@ export class AnnounceListComponent implements OnInit {
 
 	showViewModal = function(announcement){
 		this.currentAnnouncement = announcement;
+		this.currentAnnouncement.prettyTime = new Date(announcement.timeStamp).toDateString();
 		this.vModal.setAttribute('hidden', 'false');
 	};
 

@@ -166,8 +166,8 @@ export class TeamDataService implements OnInit{
 			title: title,
 			body: body
 		}
-
-		this._apiService.post('make-announcement', body, function(res){
+		console.log(data);
+		this._apiService.post('make-announcement', data, function(res){
 			self._apiService.handleCallbackWithData(res, callback, err)
 		})
 

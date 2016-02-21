@@ -15,11 +15,12 @@ export class Team {
 	}
 
 	static fromJsonObject = function(jsonObject) {
-
-		var announements = Announcement.fromJsonArray(jsonObject.announcements)
+		console.log(jsonObject.announcements);
+		var announcements = Announcement.fromJsonArray(jsonObject.announcements)
+		console.log(announcements);
 		var admins = jsonObject.admins
 		var members = User.fromJsonArray(jsonObject.members)
-		var newTeam = new Team(jsonObject.teamName, admins, members, announements)
+		var newTeam = new Team(jsonObject.teamName, admins, members, announcements)
 		return newTeam;
 	}
 
