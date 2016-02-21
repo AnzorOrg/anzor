@@ -12,21 +12,27 @@ var Auth = function(app) {
 Auth.authenticate = function(req, res) {
 	User.findOne({email:req.body.email}).exec(function(err, user){
 		if(!user){
-			res.json({email: 'Not found'});
-		}
-		var hash = crypto.createHash('sha256').update(req.body.password).digest('base64');
-		if(hash == user.password){
-			req.session.regenerate(function(){
-				req.session.user = user;
-				res.json({
-					email: user.email,
-					firstName: user.firstName,
-					lastName: user.lastName
-				});
-			});
-		}
-		else
+			console.log('email not found');
 			res.redirect('/');
+		}
+		else{
+			var hash = crypto.createHash('sha256').update(req.body.password).digest('base64');
+			if(hash == user.password){
+				req.session.regenerate(function(){
+					req.session.user = user;
+					console.log(user);
+					res.json({
+						email: user.email,
+						firstName: user.firstName,
+						lastName: user.lastName
+					});
+				});
+			}
+			else{
+				res.redirect('/');
+				console.log('goofed');
+			}
+		}
 	});
 }
 

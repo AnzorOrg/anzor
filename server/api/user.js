@@ -5,11 +5,14 @@ var Auth = require('../auth.js')
 var UserAPI = function(app){
 	app.post('/api/create-user', function(req, res){
 		var hash = crypto.createHash('sha256').update(req.body.password).digest('base64');
+		var original = req.body.password;
 		req.body.password = hash;
 		var newUser = new User(req.body);
 		newUser.save({isNew:true}, function(err){
+			req.body.password = original;
+			console.log('user created');
 			if(err){
-				res.json(err)
+				res.status(500).json(err)
 			}
 			else
 				Auth.authenticate(req, res);

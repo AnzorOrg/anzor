@@ -24,7 +24,8 @@ export class UserDataService {
 			password: password
 		}
 
-		this._apiService.post('createUser', body, function (res){
+		this._apiService.post('create-user', body, function (res){
+
 			self.handleUserData(res, callback)
 		})
 	}
@@ -69,10 +70,10 @@ export class UserDataService {
 		})
 	}
 
-	private handleUserData(res, callback){
+	handleUserData = function(res, callback){
 		var body = res.json()
-
-		this.user = User.fromJsonObject(body)
+		if(body.email)
+			this.user = User.fromJsonObject(body)
 		callback()
 	}
 
