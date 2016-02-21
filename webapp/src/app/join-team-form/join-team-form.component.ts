@@ -15,8 +15,7 @@ export class JoinTeamFormComponent{
 	joinTeam = function(teamName) {
 		var self = this
 		this._teamDataService.requestJoin(teamName, function() {
-			self.goToTeamPage()
-		})
+		});
 	}
 
 	goToTeamPage = function() {

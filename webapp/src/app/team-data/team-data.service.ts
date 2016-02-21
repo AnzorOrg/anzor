@@ -34,6 +34,18 @@ export class TeamDataService implements OnInit{
 		})
 	}
 
+	getTeam = function(name, callback, err) {
+		var self = this
+		var body = {
+			name: name
+		}
+		this._apiService.post('team', body, function (res) {
+			var data = res.json();
+			var thisTeam = Team.fromJsonObject(data);
+			callback(thisTeam);
+		})
+	}
+
 	getMyTeams = function(callback, err) {
 		var self = this
 		this._apiService.get('my-teams', function(res) {
@@ -53,7 +65,6 @@ export class TeamDataService implements OnInit{
 		this._apiService.post('request-join', body, function (res){
 			self._apiService.handleCallbackWithData(res,
 				function(data) {
-					var newTeam = Team.fromJsonObject(data)
 					callback()
 				},
 				err)
