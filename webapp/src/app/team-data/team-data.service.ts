@@ -41,8 +41,13 @@ export class TeamDataService implements OnInit{
 		}
 		this._apiService.post('team', body, function (res) {
 			var data = res.json();
-			var thisTeam = Team.fromJsonObject(data);
-			callback(thisTeam);
+			if(data){
+				var thisTeam = Team.fromJsonObject(data);
+				callback(thisTeam);
+			}
+			else{
+				err();
+			}
 		})
 	}
 
