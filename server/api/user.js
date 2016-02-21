@@ -118,6 +118,26 @@ var UserAPI = function(app){
 			}
 		});
 	});
+
+	app.post('/api/remove-profile', Auth.restrict, function(req, res){
+		User.findOneAndRemove({email: req.session.user.email}).exec(function(err, user){
+			for(var i=0; i<user.teams.length; i++){
+				var teamName = user.teams[i];
+				Team.findOne({teamName: teamName}).exec(function(err, team){
+					var index = team.members.indexOf(user.email);
+					if(index!=-1){
+						team.members.splice(index, 1);
+						team.save({isNew:false}, function(err){
+							console.log(err);
+						});
+					}
+				});
+			}
+		});
+		req.session.destroy(function(){
+    		res.redirect('/');
+  		});
+	});
 }
 
 module.exports = UserAPI;

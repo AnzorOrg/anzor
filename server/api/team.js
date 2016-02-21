@@ -72,6 +72,28 @@ var TeamAPI = function(app){
 	app.post('/api/leave-team', Auth.restrict, function(req, res){
 		Helper.leaveGroup(req.session.user.email, req.body.team, null);
 	});
+
+	app.post('/api/make-announcement', Auth.restrict, function(req, res){
+		Team.findOne({teamName: req.body.team}).exec(function(err, team){
+			if(team){
+				if(team.admins[0] == req.session.user.email){
+					team.announcements.push({title: req.body.title, author: req.session.user.firstName, body: req.body.body});
+					team.save({isNew:false}, function(err){
+						if(err)
+							res.json(err);
+						else
+							res.status(200).json({msg:'announcement posted'});
+					});
+				}
+				else{
+					res.json({err: 'You are not admin'});
+				}
+			}
+			else{
+				res.json({err:'Team does not exist'});
+			}
+		});
+	});
 }
 
 module.exports = TeamAPI;
