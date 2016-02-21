@@ -22,7 +22,7 @@ var TeamAPI = function(app){
 			}
 			else{
 				User.findOne({email: team.admins[0]}).exec(function(err,admin){
-					admin.notifications.push({email:req.session.email, firstName: req.session.firstName, lastName: req.session.lastName, team: teamName, type: 'join-request', read:false});
+					admin.notifications.push({email:req.session.user.email, firstName: req.session.user.firstName, lastName: req.session.user.lastName, team: teamName, type: 'join-request', read:false});
 					admin.save({isNew:false},function(err){
 						if(err)
 							res.json(err);
@@ -50,7 +50,7 @@ var TeamAPI = function(app){
 							res.json({err:'User does not exist'});
 						}
 						else{
-							user.notifications.push({email:req.session.email, firstName: req.session.firstName, lastName: req.session.lastName, team: teamName, type: 'invite', read:false});
+							user.notifications.push({email:req.session.user.email, firstName: req.session.user.firstName, lastName: req.session.user.lastName, team: teamName, type: 'invite', read:false});
 							user.save({isNew:false},function(err){
 								if(err)
 									res.json(err);
@@ -60,6 +60,36 @@ var TeamAPI = function(app){
 						}
 					});
 				}
+			}
+		});
+	});
+
+	app.post('/api/accept-join-request', Auth.restrict, function(req, res){
+		User.findOne({email:req.session.user.email}).exec(function(err, admin){
+			var notif = admin.notifications.id(req.body.id);
+			if(!notif.read){
+				notif.read = true;
+				var email = notif.email;
+				var teamName = notif.team;
+				User.findOne({email: email}).exec(function(err, user){
+					user.teams.push(teamName);
+					user.notifications.push({email: admin.email, firstName: admin.firstName, lastName: admin.lastName, team: teamName, type: 'accept-join-request', read:false});
+					user.save({isNew:false}, function(err){
+						if(err)
+							console.log(err);
+					});
+				});
+				Team.findOne({teamName:teamName}).exec(function(err, team){
+					team.members.push(email);
+					team.save({isNew:false}, function(err){
+						if(err)
+							console.log(err);
+					});
+				});
+				res.json({message:'sending accept message'});
+			}
+			else{
+				res.json({message:'Already responded to this notification'});
 			}
 		});
 	});
