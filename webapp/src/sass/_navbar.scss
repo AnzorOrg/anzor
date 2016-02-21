@@ -8,8 +8,20 @@
 	justify-content: center;
 
 	.nav-links {
+		
+		&.dropdown {
+		    flex-direction: column;
+		    position: absolute;
+		    justify-content: flex-start;
+		    top: 50px;
+		    right: 0;
 
-		height: 100%;
+		    &>li {
+			    min-height: 50px;
+			    width: 100%;
+			    background-color: #E27A3F;
+			}
+		}
 
 		&.left {
 			flex: 1;

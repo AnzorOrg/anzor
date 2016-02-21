@@ -46,3 +46,7 @@ h1,h2,h3,h4,h5,h6,p,div,ul,li {
 	width: 100%;
 	max-width: 1280px;
 }
+
+*[hidden="true"] {
+	display: none;
+}
