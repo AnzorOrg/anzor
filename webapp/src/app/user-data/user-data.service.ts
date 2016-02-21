@@ -52,7 +52,7 @@ export class UserDataService {
 			var data = res.json()
 			if (data != null) {
 				if (self.user == null) {
-					self.user = new User(data.firstName, data.lastName, data.email)
+					self.user = User.fromJsonObject(data)
 				}
 				trueCallback()
 			} else {
@@ -72,7 +72,7 @@ export class UserDataService {
 	private handleUserData(res, callback){
 		var body = res.json()
 
-		this.user = new User(body.firstName, body.lastName, body.email)
+		this.user = User.fromJsonObject(body)
 		callback()
 	}
 

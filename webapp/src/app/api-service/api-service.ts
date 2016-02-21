@@ -23,4 +23,23 @@ export class ApiService{
 		this._http.get(this.urlPrefix + url)
 			.subscribe(callback);
 	}
+
+	handleCallbackWithData = function(res, callback, err){
+		if(res.status == 200) {
+			var data = res.json()
+			callback(data)
+		} else {
+			var errData = res.json()
+			err(errData)
+		}
+	}
+
+	handleCallback = function(res, callback, err) {
+		if (res.status == 200) {
+			callback()
+		} else {
+			var errData = res.json()
+			err(errData)
+		}
+	}
 }
