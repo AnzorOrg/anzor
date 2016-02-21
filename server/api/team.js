@@ -39,7 +39,7 @@ var TeamAPI = function(app){
 		var teamName = req.body.team;
 		Team.findOne({teamName: teamName}).exec(function(err, team){
 			if(!team){
-				res.json({err:'Team does not exist'});
+				res.status(500).json({err:'Team does not exist'});
 			}
 			else{
 				User.findOne({email: team.admins[0]}).exec(function(err,admin){

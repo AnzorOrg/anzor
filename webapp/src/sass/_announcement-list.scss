@@ -31,4 +31,38 @@ announcement-list {
 	    	padding: .5rem 1rem;
 	    }
 	}
+
+	announcement-form {
+		width: 100%;
+
+		textarea {
+			resize: none;
+		}
+	}
+
+	.view-announcement {
+
+		flex-direction: column;
+
+		hr {
+			flex: 1;
+	    	border: none;
+	    	border-bottom: solid 1px #ccc;
+	    	margin-right: 1rem;
+		}
+
+		.title {
+			padding: .5rem 0;
+		}
+
+		.author-info {
+		    color: gray;
+		    justify-content: flex-end;
+		}
+
+		p.body {
+		    margin-top: 1rem;
+		}
+
+	}
 }
