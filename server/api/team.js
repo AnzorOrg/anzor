@@ -6,7 +6,7 @@ var Helper = require(__dirname+'/team-helper.js');
 var TeamAPI = function(app){
 	app.post('/api/team', Auth.restrict, function(req, res){
 		Team.findOne({teamName:req.body.team}).exec(function(err, team){
-			if(!team || !team.members.contains(req.session.user.email) || !team.admins.contains(req.session))
+			if(!team || (team.members.indexOf(req.session.user.email)==-1 && team.admins.indexOf(req.session.user.email)==-1))
 				res.json(null);
 			else
 				res.json(team);
