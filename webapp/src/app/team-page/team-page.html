@@ -1,5 +1,8 @@
-<div *ngIf="team != null" class="team-page">
-	<h1 class="serif">{{_routeParams.get('teamid')}}</h1>
-	<h3>{{team.admins[0]}}</h3>
-	<announcement-list announcements="team.announcements"></announcement-list>
+
+<div class="container">
+	<div *ngIf="team != null" class="team-page">
+		<h1 class="serif">{{_routeParams.get('teamid')}}</h1>
+		<h3>{{team.admins[0]}}</h3>
+		<announcement-list [announcements]="team.announcements"></announcement-list>
+	</div>
 </div>

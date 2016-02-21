@@ -1,11 +1,11 @@
-<div class="announcements-list">
+<div class="announcement-list">
 	<h2 class="serif">Announcements</h2>
 	<ul class="announcement-links">
-		<li *ngIf="announcements != null" *ngFor="#announcement of announcements">
+		<li *ngFor="#announcement of announcements">
 			<button class="primary" (click)="showViewModal(announcement)">{{announcement.title}}</button>	
 		</li>
 	</ul>
-	<button (click)="showCreateModal()">Make Announcement</button>>
+	<button (click)="showCreateModal()">Make Announcement</button>
 
 	<div #createModal>
 	  <modal title="Create Announcement">
@@ -16,7 +16,7 @@
 	</div>
 
 	<div #viewModal>
-	  <modal [title]="currentAnnouncement.title">
+	  <modal *ngIf="currentAnnouncement != null" [title]="currentAnnouncement.title">
 	    <p class="author-info">{{currentAnnouncement.author}} at {{currentAnnouncement.time}}</p>
 	    <p class="body">{{currentAnnouncement.body}}</p>
 	  </modal>

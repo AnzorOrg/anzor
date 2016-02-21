@@ -1,5 +1,5 @@
 import {Component, OnInit, Input, ViewChild, Renderer} from 'angular2/core';
-import {Router} from 'angular2/router';
+import {RouteParams} from 'angular2/router';
 import {NgFor} from 'angular2/common';
 import {ModalComponent} from '../modal/modal.component';
 import {AnnouncementFormComponent} from '../announcement-form/announcement-form.component';
@@ -24,7 +24,7 @@ export class AnnounceListComponent implements OnInit {
 
 	constructor(
 		private _teamDataService: TeamDataService,
-		private _router: Router,
+		private _routeParams: RouteParams,
 		private _renderer: Renderer
 	) {};
 
@@ -54,13 +54,17 @@ export class AnnounceListComponent implements OnInit {
 		var title = this.cInputs[0].value;
 		var body = this.cTextareas[0].value;
 
+		console.log(title);
+
 		this._teamDataService.makeAnnouncement(
+			this._routeParams.get('teamid'),
 			title, body,
 			function(){
 				self.announcementMade();
 			},
-			function(){
+			function(err){
 				console.log('Error posting announcement');
+				console.log(err);
 			}
 		);
 	};
