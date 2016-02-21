@@ -9,7 +9,7 @@ var TeamAPI = function(app){
 			if(!team || !team.members.contains(req.session.user.email) || !team.admins.contains(req.session))
 				res.json(null);
 			else
-				res.json(team;
+				res.json(team);
 		});
 	});
 
