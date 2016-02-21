@@ -24,7 +24,6 @@ export class UserDataService {
 			password: password
 		}
 
-
 		this._apiService.post('createUser', body, function (res){
 			self.handleUserData(res, callback)
 		})
@@ -58,11 +57,13 @@ export class UserDataService {
 		this._apiService.get('signed-in', function(res){
 			var data = res.json()
 			if (data.isLoggedIn) {
+				if (this.user != null) {
+					
+				}
 				trueCallback()
 			} else {
 				falseCallback()
 			}
 		})
 	}
-
 }
