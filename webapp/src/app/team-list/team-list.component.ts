@@ -90,7 +90,12 @@ export class TeamListComponent implements OnInit {
 	}
 
 	joinRequested = function() {
-		console.log('Join requested!');
+		var self = this
+		this._teamDataService.requestJoin(self.jtInputs[0].value, 
+			function() { console.log('Message sent')
+				self.jtModal.setAttribute('hidden', 'true');
+			}, 
+			function(err){console.log(err)});
 	}
 
 	routeToTeam = function(team){
