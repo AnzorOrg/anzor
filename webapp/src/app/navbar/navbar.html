@@ -24,6 +24,8 @@
 </div>
 <div #signInModal>
   <modal title="Sign In">
-    <sign-in-form></sign-in-form>
+    <sign-in-form hiddenButton="true">
+      <button (click)="modalSignInClicked()">Sign In</button>
+    </sign-in-form>
   </modal>
 </div>

@@ -1,4 +1,4 @@
-import {Component} from 'angular2/core';
+import {Component, Input} from 'angular2/core';
 import {Router} from 'angular2/router';
 import {UserDataService} from '../user-data/user-data.service';
 
@@ -8,6 +8,8 @@ import {UserDataService} from '../user-data/user-data.service';
 })
 export class SignInFormComponent
 {
+	@Input() hideButton;
+
 	constructor(
 		private _userDataService: UserDataService,
 		private _router: Router

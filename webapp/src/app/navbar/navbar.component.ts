@@ -13,6 +13,7 @@ import {SignInFormComponent} from '../sign-in-form/sign-in-form.component';
 export class NavbarComponent implements OnInit {
 
 	@ViewChild('signInModal') signInModal;
+	inputs;
 	modal;
 
 	constructor(
@@ -29,6 +30,8 @@ export class NavbarComponent implements OnInit {
 	ngAfterViewInit() {
 		this.modal = 
 			this.signInModal.nativeElement.getElementsByClassName('modal-container')[0];
+
+		this.inputs = this.modal.getElementsByTagName('input');
 	}
 
 	checkIfSignedIn = function() {
@@ -51,6 +54,16 @@ export class NavbarComponent implements OnInit {
 
 	signIn = function() {
 		this.modal.setAttribute('hidden', 'false');
+	};
+
+	modalSignInClicked = function() {
+		var self = this;
+		var email = this.inputs[0].value;
+		var password = this.inputs[1].value;
+		this._userDataService.signIn(email, password, function() {
+			self.modal.setAttribute('hidden', 'true');
+			self.userSignedIn(); 
+		});
 	};
 
 	signOut = function(){
