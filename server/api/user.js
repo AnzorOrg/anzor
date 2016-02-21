@@ -20,17 +20,30 @@ var UserAPI = function(app){
 		Auth.authenticate(req, res);
 	});
 
+	app.get('/api/signout', Auth.restrict, function(req,res){
+		req.session.destroy(function(){
+    		res.redirect('/');
+  		});
+	});
+
 	app.get('/api/signed-in', function(req,res){
 		if(req.session.user){
-			res.json({isLoggedIn: true});
+			res.json({
+				email: req.session.user.email,
+				firstName: req.session.user.firstName,
+				lastName: req.session.user.lastName
+			});
 		}
 		else {
-			res.json({isLoggedIn: false});
+			res.json(null);
 		}
 	});
 
 	app.get('/api/notifications', Auth.restrict, function(req, res){
-		res.json({notifications: req.session.user.notifications});
+		User.findOne({email: req.session.user.email}).exec(function(err, user){
+			req.session.user.notifications = user.notifications;
+			res.json({notifications: user.notifications});
+		});
 	});
 
 	app.get('/api/my-teams', Auth.restrict, function(req, res){
