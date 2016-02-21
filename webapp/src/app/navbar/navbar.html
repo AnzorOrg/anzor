@@ -1,12 +1,21 @@
 <div class="navbar">
-	<div class="container">
+  <div class="container">
 
     <ul class="nav-links left">
-      <li class="brand serif">Togethr</li>
+      <li class="brand serif">Tethr</li>
     </ul>
 
     <ul class="nav-links right">
-      <li>Sign in</li>
+
+      <li *ngIf="_userDataService.user == null" (click)="signIn()">Sign in</li>
+
+      <li 
+        *ngIf="_userDataService.user != null"
+        (mouseover)="showDropdown(userDropdown)"
+        (click)="profileClicked()">{{_userDataService.user.firstName}}</li>
+      <ul #userDropdown class="nav-links dropdown" (mouseleave)="hideDropdown(userDropdown)" hidden="true">
+        <li (click)="signOut()">Sign out</li>
+      </ul>
     </ul>
 
   </div>
