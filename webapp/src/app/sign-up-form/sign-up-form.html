@@ -1,0 +1,12 @@
+<form>
+  <label>Name</label>
+  <input #firstName type="text" placeholder="First Name">
+  <input type="text" #lastName placeholder="Last Name">
+  <label>Email</label>
+  <input type="email" #email placeholder="Email">
+  <label>Password</label>
+  <input type="password" #password placeholder="Password">
+  <input type="password" #confirmPassword placeholder="Confirm Password">
+  <button class="" 
+    (click)="signUp(firstName.value,lastName.value,email.value,password.value)">Sign Up</button>
+</form>

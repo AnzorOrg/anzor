@@ -50,7 +50,6 @@ export class UserDataService {
 		var self = this
 		this._apiService.get('signed-in', function(res) {
 			var data = res.json()
-			console.log(data)
 			if (data != null) {
 				if (self.user == null) {
 					self.user = new User(data.firstName, data.lastName, data.email)
@@ -63,7 +62,9 @@ export class UserDataService {
 	}
 
 	signOut = function(callback) {
+		var self = this;
 		this._apiService.get('signout', function (res) {
+			self.user = null;
 			callback()
 		})
 	}

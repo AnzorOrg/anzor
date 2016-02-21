@@ -1,4 +1,4 @@
-import {Component} from 'angular2/core';
+import {Component, OnInit} from 'angular2/core';
 import {Router} from 'angular2/router';
 import {UserDataService} from '../user-data/user-data.service';
 
@@ -6,12 +6,27 @@ import {UserDataService} from '../user-data/user-data.service';
 	selector: 'navbar',
 	templateUrl: './app/navbar/navbar.html'
 })
-export class NavbarComponent {
+export class NavbarComponent implements OnInit {
 
 	constructor(
 		private _router: Router,
 		private _userDataService: UserDataService
 	){};
+
+	ngOnInit() {
+		if (this._userDataService.isSignedIn != null)
+			this.checkIfSignedIn();
+	};
+
+	checkIfSignedIn = function() {
+		var self = this;
+		this._userDataService.isSignedIn(
+			function(){},
+			function() {
+				self._router.navigate(['Welcome']);
+			}
+		);
+	};
 
 	showDropdown = function(dropdown) {
 		dropdown.setAttribute('hidden', 'false');
