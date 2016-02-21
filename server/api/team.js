@@ -94,6 +94,16 @@ var TeamAPI = function(app){
 			}
 		});
 	});
+
+	app.post('/api/get-team', Auth.restrict, function(req, res){
+		Team.findOne({teamName: req.body.team}).exec(function(err, team){
+			if(team) {
+				res.json(team);
+			} else{
+				res.json({err:'Team does not exist'});
+			}
+		}
+	});
 }
 
 module.exports = TeamAPI;

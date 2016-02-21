@@ -21,4 +21,12 @@ export class Team {
 		var members = User.fromJsonArray(jsonObject.members)
 		var newTeam = new Team(jsonObject.teamName, admins, members, announements)
 	}
+
+	static fromJsonArray = function(jsonArray) {
+		var teams = []
+		for (var i = 0; i < jsonArray.length; i++) {
+			teams.push(User.fromJsonObject(jsonArray[i]))
+		}
+		return teams
+	}
 }

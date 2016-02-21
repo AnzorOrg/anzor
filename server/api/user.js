@@ -2,7 +2,7 @@ var User = require('../models/user.js');
 const crypto = require('crypto');
 var Auth = require('../auth.js')
 
-var UserAPI = function(app){
+var UserAPI = funciton(app){
 	app.post('/api/create-user', function(req, res){
 		var hash = crypto.createHash('sha256').update(req.body.password).digest('base64');
 		req.body.password = hash;
