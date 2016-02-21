@@ -75,7 +75,7 @@ export class UserDataService {
 			var data = res.json()
 			var teams = data.teams
 			callback(teams)
-		}
+		})
 	}
 
 

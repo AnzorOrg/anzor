@@ -1,0 +1,7 @@
+<form>
+	<label>Team Name</label>
+	<input type="text" #teamName placeholder="Team Name">
+	<button *ngIf="hideButton != null" class="" 
+		(click)="joinTeam(teamName.value)">Join Team</button>
+	<ng-content></ng-content>
+</form>
