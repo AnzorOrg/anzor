@@ -2,12 +2,12 @@ import {Component, OnInit} from 'angular2/core';
 import {RouteParams, Router} from 'angular2/router';
 
 import {TeamDataService} from '../team-data/team-data.service';
-import {AnnouncementFormComponent} from '../announcement-form/announcement-form.component';
+import {AnnounceListComponent} from '../announcement-list/announcement-list.component';
 
 @Component({
     selector: 'team-page',
     templateUrl: './app/team-page/team-page.html',
-    directives: [AnnouncementFormComponent]
+    directives: [AnnounceListComponent]
 })
 export class TeamPageComponent implements OnInit{
 

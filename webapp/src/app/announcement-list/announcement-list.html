@@ -1,0 +1,25 @@
+<div class="announcements-list">
+	<h2 class="serif">Announcements</h2>
+	<ul class="announcement-links">
+		<li *ngIf="announcements != null" *ngFor="#announcement of announcements">
+			<button class="primary" (click)="showViewModal(announcement)">{{announcement.title}}</button>	
+		</li>
+	</ul>
+	<button (click)="showCreateModal()">Make Announcement</button>>
+
+	<div #createModal>
+	  <modal title="Create Announcement">
+	    <announcement-form hiddenButton="true">
+	      <button (click)="modalPostClicked()">Post Announcement</button>
+	    </announcement-form>
+	  </modal>
+	</div>
+
+	<div #viewModal>
+	  <modal [title]="currentAnnouncement.title">
+	    <p class="author-info">{{currentAnnouncement.author}} at {{currentAnnouncement.time}}</p>
+	    <p class="body">{{currentAnnouncement.body}}</p>
+	  </modal>
+	</div>
+	
+</div>
