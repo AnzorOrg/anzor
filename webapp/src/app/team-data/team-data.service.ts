@@ -1,6 +1,8 @@
 import {Injectable} from 'angular2/core'
 import {ApiService} from '../api-service/api-service'
 import {Team} from './team'
+import {Announcement} from '../announcement-data/announcement'
+import {User} from '../user-data/user'
 
 @Injectable()
 export class TeamDataService {
@@ -10,11 +12,14 @@ export class TeamDataService {
 	constructor(private _apiService: ApiService) { }
 
 	createTeam = function(name, callback) {
+		var self = this
 		var body = {
 			name: name
 		}
 
 		this._apiService.post('create-team', body, function (res) {
+			var data = res.json()
+			var newTeam = Team.fromJsonObject(data)
 			callback()
 		})
 	}

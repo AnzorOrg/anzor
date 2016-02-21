@@ -5,4 +5,11 @@ export class Team {
 	admins: [string]
 	members: [string]
 	announcements: [Announcement]
+
+	constructor(teamName, admins, members, announcements){
+		this.teamName = teamName
+		this.admins = admins
+		this.members = members
+		this.announcements = announcements
+	}
 }
