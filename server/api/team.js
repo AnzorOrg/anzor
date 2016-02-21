@@ -102,7 +102,7 @@ var TeamAPI = function(app){
 			} else{
 				res.json({err:'Team does not exist'});
 			}
-		}
+		});
 	});
 }
 
