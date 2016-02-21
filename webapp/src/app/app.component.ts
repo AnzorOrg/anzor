@@ -2,6 +2,7 @@ import {Component} from 'angular2/core';
 import {RouteConfig, ROUTER_DIRECTIVES} from 'angular2/router';
 
 import {NavbarComponent} from './navbar/navbar.component';
+
 import {WelcomePageComponent} from './welcome-page/welcome-page.component';
 import {DashboardPageComponent} from './dashboard-page/dashboard-page.component';
 

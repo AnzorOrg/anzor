@@ -15,7 +15,7 @@ export class SignInFormComponent
 
 	signIn = function(email, password) {
 		var self = this;
-		this._userDataService.signIn(email, password, function() { 
+		this._userDataService.signIn(email, password, function() {
 			self._router.navigate(['Dashboard']);
 		});
 	};
