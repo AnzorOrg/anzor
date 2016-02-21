@@ -45,9 +45,8 @@ export class TeamDataService implements OnInit{
 				var thisTeam = Team.fromJsonObject(data);
 				callback(thisTeam);
 			}
-			else{
+			else
 				err();
-			}
 		})
 	}
 
