@@ -19,8 +19,17 @@ var TeamAPI = function(app){
 			if(err){
 				res.status(500).json(err);
 			}
-			else
-				res.json(newTeam);
+			else{
+				User.findOne({email:req.session.user.email}).exec(function(err, user){
+					user.teams.push(req.body.name);
+					user.save({isNew:false}, function(err){
+						if(err)
+							res.status(500).json(err);
+						else
+							res.status(200).json(newTeam);
+					});
+				});
+			}
 		});
 	});
 
@@ -111,7 +120,7 @@ var TeamAPI = function(app){
 			} else{
 				res.json({err:'Team does not exist'});
 			}
-		}
+		});
 	});
 }
 

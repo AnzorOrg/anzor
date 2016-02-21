@@ -28,7 +28,7 @@ export class NavbarComponent implements OnInit {
 	};
 
 	ngAfterViewInit() {
-		this.modal = 
+		this.modal =
 			this.signInModal.nativeElement.getElementsByClassName('modal-container')[0];
 
 		this.inputs = this.modal.getElementsByTagName('input');

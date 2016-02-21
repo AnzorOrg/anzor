@@ -69,16 +69,6 @@ export class UserDataService {
 		})
 	}
 
-	myTeams = function(callback, err) {
-		var self = this
-		this._apiService.get('my-teams', function(res) {
-			var data = res.json()
-			var teams = data.teams
-			callback(teams)
-		})
-	}
-
-
 	private handleUserData(res, callback){
 		var body = res.json()
 
