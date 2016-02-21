@@ -4,7 +4,7 @@ var User = require('../models/user.js');
 var Helper = require(__dirname+'/team-helper.js');
 
 var TeamAPI = function(app){
-	app.get('/api/team', Auth.restrict, function(req, res){
+	app.post('/api/team', Auth.restrict, function(req, res){
 		Team.findOne({teamName:req.body.team}).exec(function(err, team){
 			if(team)
 				res.json(team);
