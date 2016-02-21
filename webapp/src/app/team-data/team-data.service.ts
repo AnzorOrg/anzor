@@ -53,7 +53,6 @@ export class TeamDataService implements OnInit{
 		this._apiService.post('request-join', body, function (res){
 			self._apiService.handleCallbackWithData(res,
 				function(data) {
-					var newTeam = Team.fromJsonObject(data)
 					callback()
 				},
 				err)

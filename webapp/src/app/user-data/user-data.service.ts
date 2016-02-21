@@ -15,7 +15,6 @@ export class UserDataService {
 	signUp = function (firstName, lastName, email, password, callback){
 		var self = this
 		
-		this.user = new User(firstName, lastName, email)
 
 		var body = {
 			firstName: firstName,
@@ -72,8 +71,10 @@ export class UserDataService {
 
 	handleUserData = function(res, callback){
 		var body = res.json()
-		if(body.email)
+		if(body.email){
 			this.user = User.fromJsonObject(body)
+			console.log('user made');
+		}
 		callback()
 	}
 
