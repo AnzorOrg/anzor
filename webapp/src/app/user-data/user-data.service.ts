@@ -48,14 +48,21 @@ export class UserDataService {
 	}
 
 	private handleUserData(res, callback){
-		var body = JSON.parse(res._body)
+		var body = res.json()
 
 		this.user = new User(body.firstName, body.lastName, body.email)
 		callback()
 	}
 
 	isSignedIn = function(trueCallback, falseCallback){
-
+		this._apiService.get('signed-in', function(res){
+			var data = res.json()
+			if (data.isLoggedIn) {
+				trueCallback()
+			} else {
+				falseCallback()
+			}
+		})
 	}
 
 }
