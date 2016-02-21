@@ -12,7 +12,7 @@ var UserAPI = function(app){
 				res.json(err)
 			}
 			else
-				res.status(200).end();
+				Auth.authenticate(req, res);
 		});
 	});
 
@@ -41,13 +41,14 @@ var UserAPI = function(app){
 
 	app.get('/api/notifications', Auth.restrict, function(req, res){
 		User.findOne({email: req.session.user.email}).exec(function(err, user){
-			req.session.user.notifications = user.notifications;
 			res.json({notifications: user.notifications});
 		});
 	});
 
 	app.get('/api/my-teams', Auth.restrict, function(req, res){
-		res.json({teams: req.session.user.teams});
+		User.findOne({email: req.session.user.email}).exec(function(err, user){
+			res.json({teams: user.teams});
+		});
 	});
 }
 

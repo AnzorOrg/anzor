@@ -10,7 +10,7 @@ var TeamAPI = function(app){
 				res.json(err);
 			}
 			else
-				res.status(200).end();
+				res.json(newTeam);
 		});
 	});
 
@@ -71,6 +71,10 @@ var TeamAPI = function(app){
 				notif.read = true;
 				var email = notif.email;
 				var teamName = notif.team;
+				admin.save({isNew:false}, function(err){
+					if(err)
+						console.log(err);
+				});
 				User.findOne({email: email}).exec(function(err, user){
 					user.teams.push(teamName);
 					user.notifications.push({email: admin.email, firstName: admin.firstName, lastName: admin.lastName, team: teamName, type: 'accept-join-request', read:false});
@@ -81,6 +85,40 @@ var TeamAPI = function(app){
 				});
 				Team.findOne({teamName:teamName}).exec(function(err, team){
 					team.members.push(email);
+					team.save({isNew:false}, function(err){
+						if(err)
+							console.log(err);
+					});
+				});
+				res.json({message:'sending accept message'});
+			}
+			else{
+				res.json({message:'Already responded to this notification'});
+			}
+		});
+	});
+
+	app.post('/api/accept-invite', Auth.restrict, function(req, res){
+		User.findOne({email: req.session.user.email}).exec(function(err, user){
+			var notif = user.notifications.id(req.body.id);
+			if(!notif.read){
+				notif.read = true;
+				var adminEmail = notif.email;
+				var teamName = notif.team;
+				user.teams.push(teamName);
+				user.save({isNew:false}, function(err){
+					if(err)
+						console.log(err);
+				});
+				User.findOne({email:adminEmail}).exec(function(err, admin){
+					admin.notifications.push({email:user.email, firstName:user.firstName, lastName:user.lastName, team: teamName, type: 'accept-invite', read:false});
+					admin.save({isNew:false}, function(err){
+						if(err)
+							console.log(err);
+					});
+				});
+				Team.findOne({teamName:teamName}).exec(function(err, team){
+					team.members.push(user.email);
 					team.save({isNew:false}, function(err){
 						if(err)
 							console.log(err);
