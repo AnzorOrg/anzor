@@ -2,12 +2,15 @@
   <div class="container">
 
     <ul class="nav-links left">
-      <li class="brand serif">Tethr</li>
+      <li class="brand serif">
+        <i class="material-icons">pregnant_woman</i>
+        Tethr
+      </li>
     </ul>
 
     <ul class="nav-links right">
 
-      <li *ngIf="_userDataService.user == null" (click)="signIn()">Sign in</li>
+      <li *ngIf="_userDataService.user == null" (click)="signIn()"><i class="material-icons">face</i>Sign in</li>
 
       <li 
         *ngIf="_userDataService.user != null"
