@@ -7,6 +7,7 @@ import {User} from './user'
 export class UserDataService {
 	
 	public user: User;
+	public notifications;
 	
 	constructor(private _apiService: ApiService) {
 
@@ -78,5 +79,12 @@ export class UserDataService {
 		callback()
 	}
 
+	getNotifications = function(callback, err) {
+		var self = this
+		this._apiService.get('notifications', function(res) {
+			var data = res.json()
+			self.notifications = data.notifications
+		})
+	}
 	
 }
