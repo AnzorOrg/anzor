@@ -47,11 +47,13 @@ export class UserDataService {
 	}
 
 	isSignedIn = function(trueCallback, falseCallback) {
+		var self = this
 		this._apiService.get('signed-in', function(res) {
 			var data = res.json()
-			if (data.isLoggedIn) {
-				if (this.user != null) {
-
+			console.log(data)
+			if (data != null) {
+				if (self.user == null) {
+					self.user = new User(data.firstName, data.lastName, data.email)
 				}
 				trueCallback()
 			} else {
@@ -60,8 +62,10 @@ export class UserDataService {
 		})
 	}
 
-	signOut = function() {
-		this._apiService.get('signout', function (res) {})
+	signOut = function(callback) {
+		this._apiService.get('signout', function (res) {
+			callback()
+		})
 	}
 
 	private handleUserData(res, callback){

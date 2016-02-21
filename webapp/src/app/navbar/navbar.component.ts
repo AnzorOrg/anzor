@@ -28,7 +28,7 @@ export class NavbarComponent {
 
 	signOut = function(){
 		var self = this;
-
+		console.log('signout')
 		if(this._userDataService.signOut != null)
 			this._userDataService.signOut(function(){self.userSignedOut()});
 	};
