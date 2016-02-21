@@ -1,15 +1,20 @@
-import {Injectable} from 'angular2/core'
+import {Injectable, OnInit} from 'angular2/core'
 import {ApiService} from '../api-service/api-service'
 import {Team} from './team'
 import {Announcement} from '../announcement-data/announcement'
 import {User} from '../user-data/user'
 
 @Injectable()
-export class TeamDataService {
+export class TeamDataService implements OnInit{
 
-	teams: [Team]
+	private myTeams;
 
 	constructor(private _apiService: ApiService) { }
+
+	ngOnInit(){
+		console.log('initializing my teams');
+		this.myTeams = [];
+	}
 
 	createTeam = function(name, callback, err) {
 		var self = this
@@ -20,11 +25,22 @@ export class TeamDataService {
 		this._apiService.post('create-team', body, function (res) {
 			self._apiService.handleCallbackWithData(res, 
 				function(data){
+					console.log(data);
 					var newTeam = Team.fromJsonObject(data)
-					self.teams.push(newTeam)
+					self.myTeams.push(newTeam.teamName)
 					callback()
 				}, 
 				err)
+		})
+	}
+
+	getMyTeams = function(callback, err) {
+		var self = this
+		this._apiService.get('my-teams', function(res) {
+			var data = res.json()
+			console.log(data);
+			self.myTeams = data.teams;
+			callback();
 		})
 	}
 

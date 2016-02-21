@@ -3,8 +3,8 @@ import {Router} from 'angular2/router';
 import {TeamDataService} from '../team-data/team-data.service';
 
 @Component({
-	selector: 'create-team-form',
-	templateUrl: './app/create-team-form/create-team-form.html'
+	selector: 'join-team-form',
+	templateUrl: './app/join-team-form/join-team-form.html'
 })
 export class JoinTeamFormComponent{
 	constructor(

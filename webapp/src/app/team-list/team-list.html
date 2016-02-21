@@ -1,7 +1,7 @@
 <div class="team-list">
 	<h2 class="serif">My Teams</h2>
 	<ul class="team-links">
-		<li *ngFor="#team of _userDataService.myTeams" class="team">
+		<li *ngFor="#team of _teamDataService.myTeams" class="team">
 			<button class="primary">{{team}}</button>	
 		</li>
 	</ul>
@@ -9,4 +9,21 @@
 		<button #addTeam (click)="showAddTeamModal()">Add Team</button>
 		<button #joinTeam (click)="showJoinTeamModal()">Join Team</button>
 	</div>
+
+	<div #createTeamModal>
+	  <modal title="Create Team">
+	    <create-team-form hiddenButton="true">
+	      <button (click)="modalCreateTeamClicked()">Create Team</button>
+	    </create-team-form>
+	  </modal>
+	</div>
+
+	<div #joinTeamModal>
+	  <modal title="Join Team">
+	    <join-team-form hiddenButton="true">
+	      <button (click)="modalJoinTeamClicked()">Join Team</button>
+	    </join-team-form>
+	  </modal>
+	</div>
+	
 </div>

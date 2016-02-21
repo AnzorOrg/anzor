@@ -20,6 +20,7 @@ export class Team {
 		var admins = User.fromJsonArray(jsonObject.admins)
 		var members = User.fromJsonArray(jsonObject.members)
 		var newTeam = new Team(jsonObject.teamName, admins, members, announements)
+		return newTeam;
 	}
 
 	static fromJsonArray = function(jsonArray) {

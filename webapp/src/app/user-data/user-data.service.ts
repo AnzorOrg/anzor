@@ -7,7 +7,6 @@ import {User} from './user'
 export class UserDataService {
 	
 	public user: User;
-	public myTeams;
 	
 	constructor(private _apiService: ApiService) {
 
@@ -69,16 +68,6 @@ export class UserDataService {
 			callback()
 		})
 	}
-
-	getMyTeams = function(callback, err) {
-		var self = this
-		this._apiService.get('my-teams', function(res) {
-			var data = res.json()
-			self.myTeams = data.teams;
-			callback();
-		})
-	}
-
 
 	private handleUserData(res, callback){
 		var body = res.json()
