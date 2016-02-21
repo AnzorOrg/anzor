@@ -3,6 +3,7 @@
 	<input type="email" #signInEmail placeholder="Email">
 	<label>Password</label>
 	<input type="password" #signInPassword placeholder="Password">
-	<button class="" 
+	<button *ngIf="hideButton != null" class="" 
 		(click)="signIn(signInEmail.value,signInPassword.value)">Sign In</button>
+	<ng-content></ng-content>
 </form>
