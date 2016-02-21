@@ -8,7 +8,7 @@ var TeamAPI = function(app){
 		var newTeam = new Team({teamName: req.body.name, admins: [req.session.user.email]});
 		newTeam.save({isNew:true}, function(err){
 			if(err){
-				res.json(err);
+				res.status(500).json(err);
 			}
 			else
 				res.json(newTeam);
@@ -26,9 +26,9 @@ var TeamAPI = function(app){
 					admin.notifications.push({email:req.session.user.email, firstName: req.session.user.firstName, lastName: req.session.user.lastName, team: teamName, type: 'join-request', read:false});
 					admin.save({isNew:false},function(err){
 						if(err)
-							res.json(err);
+							res.status(500).json(err);
 						else
-							res.status(200).end();
+							res.status(200).json({msg: 'request sent'});
 					});
 				});
 			}
@@ -54,9 +54,9 @@ var TeamAPI = function(app){
 							user.notifications.push({email:req.session.user.email, firstName: req.session.user.firstName, lastName: req.session.user.lastName, team: teamName, type: 'invite', read:false});
 							user.save({isNew:false},function(err){
 								if(err)
-									res.json(err);
+									res.status(500).json(err);
 								else
-									res.status(200).end();
+									res.status(200).json({msg: 'invite sent'});
 							});
 						}
 					});
