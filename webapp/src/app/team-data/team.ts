@@ -17,7 +17,7 @@ export class Team {
 	static fromJsonObject = function(jsonObject) {
 
 		var announements = Announcement.fromJsonArray(jsonObject.announcements)
-		var admins = User.fromJsonArray(jsonObject.admins)
+		var admins = jsonObject.admins
 		var members = User.fromJsonArray(jsonObject.members)
 		var newTeam = new Team(jsonObject.teamName, admins, members, announements)
 		return newTeam;

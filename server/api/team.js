@@ -15,6 +15,7 @@ var TeamAPI = function(app){
 
 	app.post('/api/create-team', Auth.restrict, function(req, res){
 		var newTeam = new Team({teamName: req.body.name, admins: [req.session.user.email]});
+		console.log(newTeam);
 		newTeam.save({isNew:true}, function(err){
 			if(err){
 				res.status(500).json(err);

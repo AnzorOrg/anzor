@@ -11,7 +11,7 @@ import {AnnouncementFormComponent} from '../announcement-form/announcement-form.
 })
 export class TeamPageComponent implements OnInit{
 
-	private team;
+	public team: {};
 
 	constructor(
 		private _router: Router,
@@ -21,10 +21,14 @@ export class TeamPageComponent implements OnInit{
 
 	ngOnInit(){
 		var self = this;
+		
 		var teamName = this._routeParams.get('teamid');
+
+		console.log(teamName);
 		this._teamDataService.getTeam(teamName, 
 			function(team) {
 				self.team = team;
+				console.log(self.team);
 			},
 			function(){
 				console.log('TeamPage: The team name was invalid.');

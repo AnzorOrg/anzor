@@ -37,7 +37,7 @@ export class TeamDataService implements OnInit{
 	getTeam = function(name, callback, err) {
 		var self = this
 		var body = {
-			name: name
+			team: name
 		}
 		this._apiService.post('team', body, function (res) {
 			var data = res.json();

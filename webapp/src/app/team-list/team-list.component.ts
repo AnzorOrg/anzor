@@ -1,4 +1,5 @@
 import {Component, OnInit, ViewChild, Renderer} from 'angular2/core';
+import {Router} from 'angular2/router';
 import {NgFor} from 'angular2/common';
 import {ModalComponent} from '../modal/modal.component';
 import {CreateTeamFormComponent} from '../create-team-form/create-team-form.component';
@@ -22,6 +23,7 @@ export class TeamListComponent implements OnInit {
 
 	constructor(
 		private _teamDataService: TeamDataService,
+		private _router: Router,
 		private _renderer: Renderer
 	) {};
 
@@ -89,5 +91,10 @@ export class TeamListComponent implements OnInit {
 
 	joinRequested = function() {
 		console.log('Join requested!');
+	}
+
+	routeToTeam = function(team){
+		console.log(team);
+		this._router.navigate(['Team', { teamid: team }]);
 	}
 }

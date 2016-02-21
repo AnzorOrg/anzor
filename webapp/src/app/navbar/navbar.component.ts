@@ -44,6 +44,10 @@ export class NavbarComponent implements OnInit {
 		);
 	};
 
+	homeLinkClicked = function(){
+		this._router.navigate(['Dashboard']);
+	}
+
 	showDropdown = function(dropdown) {
 		dropdown.setAttribute('hidden', 'false');
 	}
