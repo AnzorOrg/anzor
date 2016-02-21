@@ -18,7 +18,7 @@ export class Announcement {
 
 	static fromJsonArray = function (jsonArray) {
 		var announcements = []
-		for (i = 0; i < jsonArray.length;i++){
+		for (var i = 0; i < jsonArray.length;i++){
 			announcements.push(Announcement.fromJsonObject(jsonArray[i]))
 		}
 		return announcements
