@@ -1,4 +1,5 @@
 var User = require('../models/user.js');
+var Team = require('../models/team.js');
 const crypto = require('crypto');
 var Auth = require('../auth.js')
 

@@ -1,9 +1,17 @@
 <div class="team-list">
-	<h2 class="serif">My Teams</h2>
+	<h2 class="serif">Notifications</h2>
 	<ul class="team-links">
 		<li *ngFor="#notification of _userDataService.notifications" class="team">
 			<button class="primary" (click)="showNotification(notification)">{{getTitle(notification)}}</button>
 		</li>
 	</ul>
+
+	<div #acceptModal>
+	  <modal title="">
+	    <view-notification hiddenButton="true">
+	      <button (click)="modalAcceptClicked()">Accept</button>
+	    </view-notification>
+	  </modal>
+	</div>
 	
 </div>

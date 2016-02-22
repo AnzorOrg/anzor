@@ -109,7 +109,7 @@ export class TeamDataService implements OnInit{
 			id: notifiactionId
 		}
 
-		this._apiService.post('accept-join-request', body, function(res) {
+		this._apiService.post('accept-invite', body, function(res) {
 			self._apiService.handleCallbackWithData(res,
 				function(data) {
 					var message = data.message
